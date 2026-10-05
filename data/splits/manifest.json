@@ -1,0 +1,98 @@
+{
+ "sines": {
+  "seq_len": 64,
+  "n_features": 4,
+  "train": [
+   8000,
+   64,
+   4
+  ],
+  "val": [
+   1000,
+   64,
+   4
+  ],
+  "test": [
+   1000,
+   64,
+   4
+  ],
+  "file": "data/splits/sines_T64.npz",
+  "range": [
+   -1.0,
+   1.0
+  ]
+ },
+ "energy": {
+  "seq_len": 96,
+  "n_features": 5,
+  "train": [
+   15712,
+   96,
+   5
+  ],
+  "val": [
+   1964,
+   96,
+   5
+  ],
+  "test": [
+   1964,
+   96,
+   5
+  ],
+  "file": "data/splits/energy_T96.npz",
+  "range": [
+   -1.0,
+   1.0
+  ]
+ },
+ "stocks": {
+  "seq_len": 128,
+  "n_features": 6,
+  "train": [
+   3443,
+   128,
+   6
+  ],
+  "val": [
+   430,
+   128,
+   6
+  ],
+  "test": [
+   431,
+   128,
+   6
+  ],
+  "file": "data/splits/stocks_T128.npz",
+  "range": [
+   -1.0,
+   1.0
+  ]
+ },
+ "ecg": {
+  "seq_len": 192,
+  "n_features": 2,
+  "train": [
+   6400,
+   192,
+   2
+  ],
+  "val": [
+   800,
+   192,
+   2
+  ],
+  "test": [
+   800,
+   192,
+   2
+  ],
+  "file": "data/splits/ecg_T192.npz",
+  "range": [
+   -1.0,
+   1.0
+  ]
+ }
+}
