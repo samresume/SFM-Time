@@ -1,0 +1,299 @@
+{
+  "dataset": "sines",
+  "tag": "sines_sfmtime",
+  "config": {
+    "name": "sfmtime_sines",
+    "model": {
+      "seq_len": 64,
+      "n_features": 4,
+      "patch_size": 1,
+      "d_model": 96,
+      "n_heads": 4,
+      "d_ff_mult": 4,
+      "dropout": 0.0,
+      "segments": 4,
+      "segment_depth": 2,
+      "rep_depth": 4,
+      "cond_mode": "adaln_token",
+      "use_global_adaln": true,
+      "n_classes": null,
+      "class_dropout_prob": 0.1,
+      "use_rope": true,
+      "use_lag_bias": false,
+      "causal": false,
+      "proj_dim": 0,
+      "proj_hidden": 512,
+      "frn_depth": 4
+    },
+    "flow": {
+      "segments": 4,
+      "steps_per_segment": 20,
+      "core": "flow",
+      "ddpm_steps": 500
+    },
+    "train": {
+      "steps": 6000,
+      "batch_size": 128,
+      "lr": 0.0001,
+      "adam_betas": [
+        0.9,
+        0.999
+      ],
+      "weight_decay": 0.0,
+      "max_grad_norm": 1.0,
+      "ema_decay": 0.999,
+      "warmup_steps": 200,
+      "align_weight": 0.0,
+      "log_every": 200,
+      "seed": 0,
+      "device": null
+    }
+  },
+  "summary": {
+    "params_total": 2729956,
+    "params_active_per_step": 1394212,
+    "blocks_total": 12,
+    "blocks_active_per_step": 6,
+    "nfe": 80,
+    "device": "mps"
+  },
+  "health_check": {
+    "all_segments_get_gradient": true,
+    "segments_without_gradient": [],
+    "per_segment_mse": [
+      0.27418,
+      0.12143,
+      0.05735,
+      0.12502
+    ],
+    "segment_imbalance_ratio": 4.78,
+    "samples_finite": true,
+    "samples_nonconstant": true,
+    "sample_std": 0.6873
+  },
+  "nfe": 80,
+  "seq_len": 64,
+  "n_features": 4,
+  "train_minutes": 18.58,
+  "sample_ms_per_sequence": 47.744,
+  "n_generated": 3000,
+  "history": [
+    {
+      "step": 0,
+      "loss": 1.5095932483673096,
+      "denoise": 1.5095932483673096,
+      "align": 0.0,
+      "elapsed_s": 0.7
+    },
+    {
+      "step": 200,
+      "loss": 0.5052230954170227,
+      "denoise": 0.5052230954170227,
+      "align": 0.0,
+      "elapsed_s": 36.6
+    },
+    {
+      "step": 400,
+      "loss": 0.31745055317878723,
+      "denoise": 0.31745055317878723,
+      "align": 0.0,
+      "elapsed_s": 72.6
+    },
+    {
+      "step": 600,
+      "loss": 0.28003787994384766,
+      "denoise": 0.28003787994384766,
+      "align": 0.0,
+      "elapsed_s": 109.2
+    },
+    {
+      "step": 800,
+      "loss": 0.21225902438163757,
+      "denoise": 0.21225902438163757,
+      "align": 0.0,
+      "elapsed_s": 146.3
+    },
+    {
+      "step": 1000,
+      "loss": 0.19992519915103912,
+      "denoise": 0.19992519915103912,
+      "align": 0.0,
+      "elapsed_s": 183.4
+    },
+    {
+      "step": 1200,
+      "loss": 0.2161877155303955,
+      "denoise": 0.2161877155303955,
+      "align": 0.0,
+      "elapsed_s": 220.5
+    },
+    {
+      "step": 1400,
+      "loss": 0.1676587462425232,
+      "denoise": 0.1676587462425232,
+      "align": 0.0,
+      "elapsed_s": 257.8
+    },
+    {
+      "step": 1600,
+      "loss": 0.184770405292511,
+      "denoise": 0.184770405292511,
+      "align": 0.0,
+      "elapsed_s": 293.5
+    },
+    {
+      "step": 1800,
+      "loss": 0.1854555904865265,
+      "denoise": 0.1854555904865265,
+      "align": 0.0,
+      "elapsed_s": 329.1
+    },
+    {
+      "step": 2000,
+      "loss": 0.16497181355953217,
+      "denoise": 0.16497181355953217,
+      "align": 0.0,
+      "elapsed_s": 364.9
+    },
+    {
+      "step": 2200,
+      "loss": 0.1628660410642624,
+      "denoise": 0.1628660410642624,
+      "align": 0.0,
+      "elapsed_s": 400.8
+    },
+    {
+      "step": 2400,
+      "loss": 0.17439734935760498,
+      "denoise": 0.17439734935760498,
+      "align": 0.0,
+      "elapsed_s": 437.9
+    },
+    {
+      "step": 2600,
+      "loss": 0.16895946860313416,
+      "denoise": 0.16895946860313416,
+      "align": 0.0,
+      "elapsed_s": 477.9
+    },
+    {
+      "step": 2800,
+      "loss": 0.1555505096912384,
+      "denoise": 0.1555505096912384,
+      "align": 0.0,
+      "elapsed_s": 515.8
+    },
+    {
+      "step": 3000,
+      "loss": 0.1633744090795517,
+      "denoise": 0.1633744090795517,
+      "align": 0.0,
+      "elapsed_s": 552.4
+    },
+    {
+      "step": 3200,
+      "loss": 0.168357715010643,
+      "denoise": 0.168357715010643,
+      "align": 0.0,
+      "elapsed_s": 590.8
+    },
+    {
+      "step": 3400,
+      "loss": 0.1520935446023941,
+      "denoise": 0.1520935446023941,
+      "align": 0.0,
+      "elapsed_s": 628.3
+    },
+    {
+      "step": 3600,
+      "loss": 0.13525721430778503,
+      "denoise": 0.13525721430778503,
+      "align": 0.0,
+      "elapsed_s": 665.6
+    },
+    {
+      "step": 3800,
+      "loss": 0.15807592868804932,
+      "denoise": 0.15807592868804932,
+      "align": 0.0,
+      "elapsed_s": 703.0
+    },
+    {
+      "step": 4000,
+      "loss": 0.1712980568408966,
+      "denoise": 0.1712980568408966,
+      "align": 0.0,
+      "elapsed_s": 741.2
+    },
+    {
+      "step": 4200,
+      "loss": 0.1503860354423523,
+      "denoise": 0.1503860354423523,
+      "align": 0.0,
+      "elapsed_s": 778.9
+    },
+    {
+      "step": 4400,
+      "loss": 0.16382265090942383,
+      "denoise": 0.16382265090942383,
+      "align": 0.0,
+      "elapsed_s": 816.6
+    },
+    {
+      "step": 4600,
+      "loss": 0.16072984039783478,
+      "denoise": 0.16072984039783478,
+      "align": 0.0,
+      "elapsed_s": 854.6
+    },
+    {
+      "step": 4800,
+      "loss": 0.15374022722244263,
+      "denoise": 0.15374022722244263,
+      "align": 0.0,
+      "elapsed_s": 892.9
+    },
+    {
+      "step": 5000,
+      "loss": 0.14325599372386932,
+      "denoise": 0.14325599372386932,
+      "align": 0.0,
+      "elapsed_s": 929.1
+    },
+    {
+      "step": 5200,
+      "loss": 0.16044017672538757,
+      "denoise": 0.16044017672538757,
+      "align": 0.0,
+      "elapsed_s": 964.9
+    },
+    {
+      "step": 5400,
+      "loss": 0.1398935168981552,
+      "denoise": 0.1398935168981552,
+      "align": 0.0,
+      "elapsed_s": 1001.3
+    },
+    {
+      "step": 5600,
+      "loss": 0.1444498896598816,
+      "denoise": 0.1444498896598816,
+      "align": 0.0,
+      "elapsed_s": 1037.8
+    },
+    {
+      "step": 5800,
+      "loss": 0.15403109788894653,
+      "denoise": 0.15403109788894653,
+      "align": 0.0,
+      "elapsed_s": 1073.9
+    },
+    {
+      "step": 5999,
+      "loss": 0.14310652017593384,
+      "denoise": 0.14310652017593384,
+      "align": 0.0,
+      "elapsed_s": 1114.8
+    }
+  ]
+}
