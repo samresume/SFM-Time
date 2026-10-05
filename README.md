@@ -26,13 +26,13 @@ reported setting. Four pieces make this work on sequences:
   **rotary position embeddings** so attention sees relative temporal offsets.
 
 Training splits each minibatch evenly across the segments and draws the
-interpolation time inside each segment's own interval — a stratified estimator
-of the usual flow-matching objective, with the same optimum, that updates every
-specialist at every step instead of whichever one a uniform draw happened to
-land in.
+interpolation time inside each segment's own interval. This is a stratified
+estimator of the usual flow-matching objective, with the same optimum, and it
+updates every specialist at every step instead of whichever one a uniform draw
+happened to land in.
 
 Although it is trained unconditionally, the same model does imputation and
-forecasting with no retraining and no extra function evaluations — see
+forecasting with no retraining and no extra function evaluations. See
 [Conditional generation](#conditional-generation).
 
 <p align="center">
@@ -79,6 +79,21 @@ python scripts/train_sfmtime.py --dataset sines --steps 6000 --dir results/run
 ```bash
 python scripts/evaluate_saved.py --datasets sines --suffix sfmtime --dir results/run/sines_sfmtime
 ```
+
+### What comes out
+
+Two real sequences (dark red) above five drawn from the model (dark blue), for
+every channel of every benchmark. The draws are independent per channel, since
+several channels are near duplicates of each other: Stocks 0 to 4 are five price
+series of one instrument and Energy 2 to 4 are three ambient sensors, so one
+draw shown across all of them would repeat rather than inform. Five draws per
+channel is what shows whether the model produces varied sequences everywhere, or
+collapses to a single shape on the channels a single example would not reveal.
+
+<p align="center">
+  <img src="docs/grid_features.png" width="760"
+       alt="Grid with one row per benchmark and one column per channel. Each panel stacks two real sequences above five generated ones, drawn at their own amplitude so a flatter draw reads as flatter.">
+</p>
 
 ## Configuration
 
@@ -134,13 +149,13 @@ scores it with identical code.
 
 Seven, all lower-is-better, in `sfmtime/metrics.py`:
 
-- **discriminative** — `|0.5 − accuracy|` of a GRU trained to separate real from
+- **discriminative**: `|0.5 - accuracy|` of a GRU trained to separate real from
   generated, so 0 means it cannot;
-- **predictive** — error of a GRU trained on generated and tested on real;
-- **Context-FID** — Fréchet distance in the representation space of a TS2Vec
+- **predictive**: error of a GRU trained on generated and tested on real;
+- **Context-FID**: Fréchet distance in the representation space of a TS2Vec
   encoder fitted on the real sequences;
-- **correlational** — difference in cross-channel correlation structure;
-- **increment**, **autocorrelation**, **spectral** — distances between the two
+- **correlational**: difference in cross-channel correlation structure;
+- **increment**, **autocorrelation**, **spectral**: distances between the two
   distributions of step-to-step differences, of autocorrelation by lag, and of
   mean log power spectra.
 
@@ -172,7 +187,7 @@ x_hid ← x_t + (t′−t)·v
 
 Wherever *m* = 0 this is the plain Euler step, so conditioning changes the
 update rule only at the observed entries. At *t* = 0 the carried target is **y**
-itself, so every observation is reproduced exactly — the maximum absolute error
+itself, so every observation is reproduced exactly. The maximum absolute error
 at observed entries is 0 in every configuration evaluated. The update is
 elementwise arithmetic, so it adds **no network evaluations**: conditional
 samples cost the same 80 evaluations as unconditional ones.
@@ -188,9 +203,9 @@ python scripts/conditional.py --datasets sines --ratios 0.1,0.3,0.5,0.7,0.9 \
     --styles separate,concurrent --horizons 0.125,0.25,0.5 --n 250 --k 10
 ```
 
-Imputation hides contiguous streaks of geometric length (mean 3) — isolated
-missing values are often recoverable by interpolation alone and make a much
-weaker test. Forecasting hides the final *h* ∈ {T/8, T/4, T/2} steps. Scores are
+Imputation hides contiguous streaks of geometric length (mean 3), because
+isolated missing values are often recoverable by interpolation alone and make a
+much weaker test. Forecasting hides the final *h* ∈ {T/8, T/4, T/2} steps. Scores are
 the squared error of the K-sample mean (squared error is minimised by the
 conditional mean, so scoring one random draw would penalise exactly the
 predictive variation a calibrated model should have) and CRPS. The references
@@ -230,3 +245,29 @@ segment that never receives gradient (so one stack stays at initialization), a
 wildly imbalanced per-segment residual, and a sampler that returns constant or
 non-finite sequences. `SFMTimeTrainer.health_check()` tests all three and both
 notebook 1 and `train_sfmtime.py` run it after training.
+
+## License
+
+Released under the MIT License.
+
+```
+Copyright (c) 2026 The Authors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
