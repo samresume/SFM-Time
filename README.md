@@ -230,11 +230,3 @@ segment that never receives gradient (so one stack stays at initialization), a
 wildly imbalanced per-segment residual, and a sampler that returns constant or
 non-finite sequences. `SFMTimeTrainer.health_check()` tests all three and both
 notebook 1 and `train_sfmtime.py` run it after training.
-
-## Acknowledgement
-
-The segmentation of flow time and the shared-trunk conditioning follow Blockwise
-Flow Matching (Park et al., NeurIPS 2025, arXiv:2510.21167), which was developed
-for image latents. What is adapted here is the backbone, the token layout, the
-training stratification and the sampler, so that the field operates on
-`(B, T, F)` sequences.
