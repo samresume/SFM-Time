@@ -1,0 +1,17 @@
+# The environment this code is verified to run in: Python 3.13 on macOS
+# (Apple Silicon, MPS backend). Training, sampling, the conditional protocol and
+# the three notebooks were executed end to end under exactly these versions.
+#
+# They are pinned so that `pip install -r` on Python 3.13 reproduces that
+# environment. Relaxing `==` to `>=` also works; the floors below are the
+# earliest releases with Python 3.13 wheels (torch 2.6, numpy 2.1, scipy
+# 1.14.1, scikit-learn 1.5.2, pandas 2.2.3, matplotlib 3.9.2). The code itself
+# uses no API newer than PyTorch 2.1, so on an older Python the bounds can be
+# relaxed much further.
+torch==2.12.0
+numpy==2.3.5
+scipy==1.16.3          # Frechet distance and the distributional metrics
+scikit-learn==1.7.2    # PCA and t-SNE in the notebooks
+pandas==2.3.3          # reading the Stocks and Energy CSVs
+matplotlib==3.10.6
+jupyter==1.1.1         # only for the three notebooks; the scripts do not need it
